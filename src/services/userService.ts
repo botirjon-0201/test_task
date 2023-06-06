@@ -1,6 +1,7 @@
 import User, { IUser } from "../models/User";
 import { compare, hash } from "bcrypt";
 import jwt from "jsonwebtoken";
+import config from "../config/dotenv";
 
 class UserService {
   async createUser(userData: any): Promise<IUser> {
@@ -30,7 +31,7 @@ class UserService {
       }
       const token = jwt.sign(
         { userId: user._id },
-        process.env.JWT_SECRET || "",
+        config.server.jwtSecret(),
         {
           expiresIn: "1h",
         }

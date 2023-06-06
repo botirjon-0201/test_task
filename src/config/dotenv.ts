@@ -3,7 +3,7 @@ const config = {
   db: {
     uri() {
       if (!process.env.MONGODB_URI) {
-        throw new Error("Please input MONGO_URI in .env file");
+        throw new Error("Please input MONGODB_URI in .env file");
       }
       return process.env.MONGODB_URI;
     },
