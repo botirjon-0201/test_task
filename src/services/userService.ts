@@ -26,16 +26,12 @@ class UserService {
   async loginUser(username: string, password: string): Promise<string | null> {
     try {
       const user = await User.findOne({ username });
-      if (!user || !(await compare(password, user.password))) {
-        return null;
-      }
-      const token = jwt.sign(
-        { userId: user._id },
-        config.server.jwtSecret(),
-        {
-          expiresIn: "1h",
-        }
-      );
+      if (!user || !(await compare(password, user.password))) return null;
+
+      const token = jwt.sign({ userId: user._id }, config.server.jwtSecret(), {
+        expiresIn: config.server.expiresIn(),
+      });
+
       user.refresh_token = token;
       await user.save();
       return token;

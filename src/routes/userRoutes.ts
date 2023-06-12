@@ -2,16 +2,17 @@ import express from "express";
 import UserController from "../controllers/userController";
 import authMiddleware from "../middlewares/authMiddleware";
 
-const router = express.Router();
+const userRouter = express.Router();
+const userController = new UserController();
 
 // Public routes
-router.post("/users", UserController.createUser);
-router.post("/users/login", UserController.loginUser);
+userRouter.post("/", userController.createUser);
+userRouter.post("/login", userController.loginUser);
 
 // Protected routes
-router.get("/users", authMiddleware, UserController.getUsers);
-router.get("/users/:id", authMiddleware, UserController.getUserById);
-router.put("/users/:id", authMiddleware, UserController.updateUser);
-router.delete("/users/:id", authMiddleware, UserController.deleteUser);
+userRouter.get("/", authMiddleware, userController.getUsers);
+userRouter.get("/:id", authMiddleware, userController.getUserById);
+userRouter.put("/:id", authMiddleware, userController.updateUser);
+userRouter.delete("/:id", authMiddleware, userController.deleteUser);
 
-export default router;
+export default userRouter;

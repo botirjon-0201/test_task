@@ -22,6 +22,12 @@ const config = {
       }
       return process.env.JWT_SECRET;
     },
+    expiresIn() {
+      if (!process.env.EXPIRES_IN) {
+        throw new Error("Please input EXPIRES_IN in .env file");
+      }
+      return process.env.EXPIRES_IN;
+    },
   },
 };
 
