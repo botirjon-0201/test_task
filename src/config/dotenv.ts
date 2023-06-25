@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const config = {
   db: {
     uri() {

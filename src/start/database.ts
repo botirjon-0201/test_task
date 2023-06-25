@@ -3,7 +3,7 @@ import config from "../config/dotenv";
 
 const db = () =>
   mongoose
-    .connect(config.db.uri() || "mongodb://localhost:27017/test_app", {
+    .connect(config.db.uri(), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as ConnectOptions)
